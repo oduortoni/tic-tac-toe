@@ -1,7 +1,9 @@
 package ttt
 
-func init_grid(tok1, tok2, empty string, dim int) (grid [][]string) {
-	grid = make([][]string, dim)
+import "fmt"
+
+func init_grid(tok1, tok2, empty string, dim int) (grid Grid) {
+	grid = make(Grid, dim)
 
 	tok := empty
 	for i := 0; i < dim; i++ {
@@ -18,9 +20,11 @@ func init_grid(tok1, tok2, empty string, dim int) (grid [][]string) {
 	}
 	return
 }
-func print_grid(grid [][]string) {
+
+func print_grid(grid Grid) {
 	size := len(grid)
 
+	fmt.Printf("\n\n\n\n")
 	line := 1
 	// column numbers
 	print("\t\t  ")
@@ -39,4 +43,12 @@ func print_grid(grid [][]string) {
 		print("\n")
 		println()
 	}
+}
+
+func update_grid(grid Grid, p1, p2 Point, empty, token string) (updated bool) {
+	grid[p1.Y][p1.X] = empty
+	grid[p2.Y][p2.X] = token
+
+	updated = true
+	return
 }
