@@ -26,16 +26,19 @@ func print_grid(grid Grid, options *Options) {
 
 	fmt.Printf("\n\n\n\n")
 	line := 1
-	// column numbers
-	print("\t\t  ")
+	
+	// top column numbers
+	print("\t\t+ ")
 	for i := 0; i < size; i++ {
 		print(" ", i+1, " ")
 	}
+	print(" + ")
 	println()
 	println()
 
 	color := ORIGINAL
 	for i := 0; i < size; i++ {
+		// left line numbers
 		print("\t\t", line, " ")
 		line++
 		for j := 0; j < size; j++ {
@@ -50,9 +53,20 @@ func print_grid(grid Grid, options *Options) {
 			word := " " + grid[i][j] + " "
 			print(color + word + ORIGINAL)
 		}
+		// right line numbers
+		print(" ", line)
 		print("\n")
 		println()
 	}
+
+	// bottom column numbers
+	print("\t\t+ ")
+	for i := 0; i < size; i++ {
+		print(" ", i+1, " ")
+	}
+	print(" + ")
+	println()
+	
 }
 
 func update_grid(grid Grid, p1, p2 Point, empty, token string) (updated bool) {
@@ -87,6 +101,23 @@ func check_valid(p1, p2 Point, width, height int) bool {
 		valid = false
 	}
 	if p2.Y < p1.Y && p2.Y < 0 { // b to t
+		valid = false
+	}
+
+	// distance to move
+	dx := p2.X - p1.X
+	if dx < 0 {
+		dx *= -1
+	}
+	dy := p2.Y - p1.Y
+	if dy < 0 {
+		dy *= -1
+	}
+
+	// can only move one square a time
+	if (dx == 0 || dx == 1) && (dy == 1 || dy == 0) {
+		valid = true
+	} else {
 		valid = false
 	}
 
