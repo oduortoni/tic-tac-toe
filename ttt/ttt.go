@@ -12,7 +12,7 @@ func Play(options *Options) {
 	ClearScreen()
 
 	reader := bufio.NewReader(os.Stdout)
-	grid := init_grid(options.Token1, options.Token2, options.Empty, options.Dimension)
+	grid := init_grid(options.TokTop, options.TokBtm, options.Empty, options.Dimension)
 
 	// initial screen
 	print_grid(grid, options)
@@ -54,20 +54,23 @@ func Play(options *Options) {
 
 		print_grid(grid, options)
 
-		if player == options.Token1 {
-			if updated := update_grid(grid, point1, point2, options.Empty, options.Token1); updated {
-				player = options.Token2
+		if player == options.TokTop {
+			if updated := update_grid(grid, point1, point2, options.Empty, options.TokTop); updated {
+				player = options.TokBtm
 			}
 		} else {
-			if updated := update_grid(grid, point1, point2, options.Empty, options.Token2); updated {
-				player = options.Token1
+			if updated := update_grid(grid, point1, point2, options.Empty, options.TokBtm); updated {
+				player = options.TokTop
 			}
 		}
-		// 	// check for winner
-		// 	if winner(grid) {
-		// 		print_success(grid, player)
-		// 	}
-		// }
+		// check for winner
+		if found, who := winner(grid, options); found {
+			print_success(grid, who)
+			print_grid(grid, options)
+			print("\n\n\n\n\n")
+			return
+		}
+
 		print_grid(grid, options)
 	}
 }
