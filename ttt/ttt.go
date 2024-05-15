@@ -55,14 +55,14 @@ func Play(options *Options) {
 		print_grid(grid, options)
 
 		if player == options.Token1 {
-			player = options.Token2
-			update_grid(grid, point1, point2, options.Empty, options.Token1)
+			if updated := update_grid(grid, point1, point2, options.Empty, options.Token1); updated {
+				player = options.Token2
+			}
 		} else {
-			player = options.Token1
-			update_grid(grid, point1, point2, options.Empty, options.Token2)
+			if updated := update_grid(grid, point1, point2, options.Empty, options.Token2); updated {
+				player = options.Token1
+			}
 		}
-		// //check valid
-		// if check_valid(grid) {
 		// 	// check for winner
 		// 	if winner(grid) {
 		// 		print_success(grid, player)
