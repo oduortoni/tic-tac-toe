@@ -3,8 +3,10 @@ package ttt
 type Grid [][]string
 
 type Options struct {
-	Token1      string
-	Token2      string
+	Token1    string
+	Color1    string
+	Token2    string
+	Color2    string
 	Empty     string
 	Dimension int
 }
