@@ -1,7 +1,5 @@
 package ttt
 
-import "fmt"
-
 func init_grid(tok1, tok2, empty string, dim int) (grid Grid) {
 	grid = make(Grid, dim)
 
@@ -21,53 +19,53 @@ func init_grid(tok1, tok2, empty string, dim int) (grid Grid) {
 	return
 }
 
-func print_grid(grid Grid, options *Options) {
-	size := len(grid)
+// func print_grid(grid Grid, options *Options) {
+// 	size := len(grid)
 
-	fmt.Printf("\n\n\n\n")
-	line := 1
+// 	fmt.Printf("\n\n\n\n")
+// 	line := 1
 
-	// top column numbers
-	print("\t\t+ ")
-	for i := 0; i < size; i++ {
-		print(" ", i+1, " ")
-	}
-	print(" + ")
-	println()
-	println()
+// 	// top column numbers
+// 	print("\t\t+ ")
+// 	for i := 0; i < size; i++ {
+// 		print(" ", i+1, " ")
+// 	}
+// 	print(" + ")
+// 	println()
+// 	println()
 
-	color := ORIGINAL
-	for i := 0; i < size; i++ {
-		// left line numbers
-		print("\t\t", line, " ")
-		line++
-		for j := 0; j < size; j++ {
-			token := grid[i][j]
-			if token == options.TokTop {
-				color = options.ColorTop
-			} else if token == options.TokBtm {
-				color = options.ColorBtm
-			} else {
-				color = ORIGINAL
-			}
-			word := " " + grid[i][j] + " "
-			print(color + word + ORIGINAL)
-		}
-		// right line numbers
-		print(" ", line)
-		print("\n")
-		println()
-	}
+// 	color := ORIGINAL
+// 	for i := 0; i < size; i++ {
+// 		// left line numbers
+// 		print("\t\t", line, " ")
+// 		line++
+// 		for j := 0; j < size; j++ {
+// 			token := grid[i][j]
+// 			if token == options.TokTop {
+// 				color = options.ColorTop
+// 			} else if token == options.TokBtm {
+// 				color = options.ColorBtm
+// 			} else {
+// 				color = ORIGINAL
+// 			}
+// 			word := " " + grid[i][j] + " "
+// 			print(color + word + ORIGINAL)
+// 		}
+// 		// right line numbers
+// 		print(" ", line)
+// 		print("\n")
+// 		println()
+// 	}
 
-	// bottom column numbers
-	print("\t\t+ ")
-	for i := 0; i < size; i++ {
-		print(" ", i+1, " ")
-	}
-	print(" + ")
-	println()
+// 	// bottom column numbers
+// 	print("\t\t+ ")
+// 	for i := 0; i < size; i++ {
+// 		print(" ", i+1, " ")
+// 	}
+// 	print(" + ")
+// 	println()
 
-}
+// }
 
 /*
 *
@@ -75,7 +73,7 @@ func print_grid(grid Grid, options *Options) {
 * update iff the square to move to is empty
 * ensure player can only move their own token
 *
-*/
+ */
 func update_grid(grid Grid, p1, p2 Point, empty, token string) (updated bool) {
 	width := len(grid[0])
 	height := len(grid)
@@ -89,4 +87,32 @@ func update_grid(grid Grid, p1, p2 Point, empty, token string) (updated bool) {
 	}
 
 	return
+}
+
+func print_grid(grid Grid, options *Options) {
+	size := len(grid)
+	color := ORIGINAL
+	boxNumber := 1
+
+	print("\n\n\n\n")
+	for i := 0; i < size; i++ {
+		print("\t\t")
+		for j := 0; j < size; j++ {
+			print(boxNumber)
+			token := grid[i][j]
+			if token == options.TokTop {
+				color = options.ColorTop
+			} else if token == options.TokBtm {
+				color = options.ColorBtm
+			} else {
+				color = ORIGINAL
+			}
+			word := " " + grid[i][j] + " "
+			print(color + word + ORIGINAL)
+			boxNumber++
+		}
+		println()
+	}
+	println()
+
 }

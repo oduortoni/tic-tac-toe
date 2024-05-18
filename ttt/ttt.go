@@ -8,6 +8,8 @@ import (
 )
 
 func Play(options *Options) {
+	coordinates := toCoordinateSystem(options.Dimension)
+
 	// begin with an empty screen
 	ClearScreen()
 
@@ -17,11 +19,10 @@ func Play(options *Options) {
 	// initial screen
 	print_grid(grid, options)
 
-	player := "o"
-	var s1, s2 string
+	player := options.TokTop
 	for {
 		// take user input and clear screen
-		fmt.Printf("\n\n\n\n\n\n\t\t-<< %s >>-\n\n\tinput>_ ", player)
+		fmt.Printf("\n\n\n\n\n\n\t\tPLAYER( %s )>_ ", player)
 		s, _ := reader.ReadString(10)
 		s = strings.TrimSpace(s)
 
@@ -38,18 +39,24 @@ func Play(options *Options) {
 		ClearScreen()
 
 		// process input
+	var s1, s2 int
 		_, err := fmt.Sscan(s, &s1, &s2)
 		if err != nil {
-			fmt.Printf("[Error] Invalid input '%s %s'\n", s1, s2)
+			fmt.Printf("[Error] Invalid input '%d %d'\n", s1, s2)
 			return
 		}
-		if !(len(s1) == len(s2) && len(s1) == 2) {
-			fmt.Printf("[Error] Invalid input format")
-			return
+
+		ok, ppoint1 := toCoord(coordinates, s1)
+		if !ok {
+			continue
 		}
-		// subtract 1 to account for the fact that our grid on screen is 1-indexed
-		point1 := Point{int(s1[0] - '1'), int(s1[1] - '1')}
-		point2 := Point{int(s2[0] - '1'), int(s2[1] - '1')}
+		ok, ppoint2 := toCoord(coordinates, s2)
+		if !ok {
+			continue
+		}
+		point1 := *ppoint1
+		point2 := *ppoint2
+		
 		//fmt.Println(point1, point2)
 
 		print_grid(grid, options)

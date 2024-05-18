@@ -41,6 +41,41 @@ func winner(grid Grid, options *Options) (bool, string) {
 		countVert = 0
 		countHoriz = 0
 	}
+
+	// check for a winner within the diagonal
+	// l => lead diagonal
+	// f => follow diagonal
+	// lDiag := 0
+	// fDiag := dimension
+	// lTop, lBot, fTop, fBot := 0, 0, 0, 0
+	// for k := 0; k < dimension; k++ {
+	// 	if grid[lDiag][lDiag] == options.TokTop {
+	// 		lTop++
+	// 	} else {
+	// 		lBot++
+	// 	}
+	// 	lDiag++
+
+	// 	if grid[k][fDiag-1] == options.TokTop {
+	// 		fTop++
+	// 	} else {
+	// 		fBot++
+	// 	}
+	// 	fDiag--
+	// }
+
+	// if lTop == dimension-1 {
+	// 	return true, options.TokTop
+	// }
+	// if lBot == dimension-1 {
+	// 	return true, options.TokBtm
+	// }
+	// if fTop == dimension-1 {
+	// 	return true, options.TokTop
+	// }
+	// if fBot == dimension-1 {
+	// 	return true, options.TokBtm
+	// }
 	return false, ""
 }
 
@@ -74,12 +109,20 @@ func check_valid(p1, p2 Point, width, height int) bool {
 		dy *= -1
 	}
 
-	// can only move one square a time
-	if (dx == 0 || dx == 1) && (dy == 1 || dy == 0) {
+	// can only move one square a time (r l t b)
+	delta := dy + dx
+	if delta == 1 {
 		valid = true
 	} else {
 		valid = false
 	}
+
+	//can only move one square a time (r l t b d)
+	// if (dx == 0 || dx == 1) && (dy == 1 || dy == 0) {
+	// 	valid = true
+	// } else {
+	// 	valid = false
+	// }
 
 	return valid
 }
