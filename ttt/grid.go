@@ -61,7 +61,7 @@ func print_grid(grid Grid, options *Options) {
 						color = ORIGINAL
 					}
 					if k == 1 && l == 1 {
-						print(GRAY)
+						print(MAGENTA)
 						print(boxNumber)
 						print(ORIGINAL)
 						boxNumber++

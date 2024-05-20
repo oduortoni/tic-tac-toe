@@ -11,10 +11,10 @@ const (
 	MAGENTA  = "\033[35m"
 	WHITE    = "\033[37m"
 	ORANGE   = "\033[38;5;208m"
-    GRAY = "\033[1;30m"
+    GRAY     = "\033[1;30m"
 	BCYAN    = "\033[1;36m"
 	BRED     = "\033[1;31m"
-	BGWHITE   = "\033[47m"
+	BGWHITE  = "\033[47m"
 )
 
 func GetColor(name string) (color string) {

@@ -32,7 +32,6 @@ func Play(options *Options) {
 		if options.Computer && turn {
 			turn = false
 
-
 			p1, p2 := computeCoords(grid, options.Empty, computerTok)
 			point1 = *p1
 			point2 = *p2
@@ -55,8 +54,8 @@ func Play(options *Options) {
 			var s1, s2 int
 			_, err := fmt.Sscan(s, &s1, &s2)
 			if err != nil {
-				fmt.Printf("[Error] Invalid input '%d %d'\n", s1, s2)
-				return
+				// wrong input format
+				continue
 			}
 
 			ok, ppoint1 := toCoord(coordinates, s1)
