@@ -42,7 +42,7 @@ func Play(options *Options) {
 			turn = true
 
 			// take user input and clear screen
-			fmt.Printf("\n\n\n\n\n\n\t\tPLAYER( %s )>_ ", player)
+			fmt.Printf("\n\n\t\tPLAYER( %s )>_ ", player)
 			s, _ := reader.ReadString(10)
 			s = strings.TrimSpace(s)
 

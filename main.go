@@ -12,9 +12,9 @@ func main() {
 
 	options := t.Options{
 		SymbolTop:  "O",
-		ColorTop:   t.GetColor("cyan"),
+		ColorTop:   t.GetColor("bcyan"),
 		SymbolBtm:  "X",
-		ColorBtm:   t.GetColor("red"),
+		ColorBtm:   t.GetColor("bred"),
 		Empty:      ".",
 		Dimension:  3,
 		Computer:   true,

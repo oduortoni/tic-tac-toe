@@ -19,54 +19,6 @@ func init_grid(tok1, tok2, empty string, dim int) (grid Grid) {
 	return
 }
 
-// func print_grid(grid Grid, options *Options) {
-// 	size := len(grid)
-
-// 	fmt.Printf("\n\n\n\n")
-// 	line := 1
-
-// 	// top column numbers
-// 	print("\t\t+ ")
-// 	for i := 0; i < size; i++ {
-// 		print(" ", i+1, " ")
-// 	}
-// 	print(" + ")
-// 	println()
-// 	println()
-
-// 	color := ORIGINAL
-// 	for i := 0; i < size; i++ {
-// 		// left line numbers
-// 		print("\t\t", line, " ")
-// 		line++
-// 		for j := 0; j < size; j++ {
-// 			token := grid[i][j]
-// 			if token == options.TokTop {
-// 				color = options.ColorTop
-// 			} else if token == options.TokBtm {
-// 				color = options.ColorBtm
-// 			} else {
-// 				color = ORIGINAL
-// 			}
-// 			word := " " + grid[i][j] + " "
-// 			print(color + word + ORIGINAL)
-// 		}
-// 		// right line numbers
-// 		print(" ", line)
-// 		print("\n")
-// 		println()
-// 	}
-
-// 	// bottom column numbers
-// 	print("\t\t+ ")
-// 	for i := 0; i < size; i++ {
-// 		print(" ", i+1, " ")
-// 	}
-// 	print(" + ")
-// 	println()
-
-// }
-
 /*
 *
 * before motion, check whether a move is valid
@@ -94,25 +46,35 @@ func print_grid(grid Grid, options *Options) {
 	color := ORIGINAL
 	boxNumber := 1
 
-	print("\n\n\n\n")
+	print("\n\n")
 	for i := 0; i < size; i++ {
-		print("\t\t")
-		for j := 0; j < size; j++ {
-			print(boxNumber)
-			token := grid[i][j]
-			if token == options.SymbolTop {
-				color = options.ColorTop
-			} else if token == options.SymbolBtm {
-				color = options.ColorBtm
-			} else {
-				color = ORIGINAL
+		for k := 0; k < 3; k++ {
+			print("\t")
+			for j := 0; j < size; j++ {
+				for l := 0; l < 5; l++ {
+					token := grid[i][j]
+					if token == options.SymbolTop {
+						color = options.ColorTop
+					} else if token == options.SymbolBtm {
+						color = options.ColorBtm
+					} else {
+						color = ORIGINAL
+					}
+					if k == 1 && l == 1 {
+						print(GRAY)
+						print(boxNumber)
+						print(ORIGINAL)
+						boxNumber++
+					} else if k == 2 && l == 2 {
+						word := grid[i][j]
+						print(color + word + ORIGINAL)
+					} else {
+						print(" ")
+					}
+				}
 			}
-			word := " " + grid[i][j] + " "
-			print(color + word + ORIGINAL)
-			boxNumber++
+			print("\n")
 		}
-		println()
 	}
-	println()
-
+	// println()
 }
