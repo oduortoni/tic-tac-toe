@@ -20,19 +20,19 @@ func winner(grid Grid, options *Options) (bool, string) {
 
 		// complete row bar starting position
 		if countVert == dimension-1 {
-			if row != 0 && grid[row][0] == options.TokTop {
-				return true, options.TokTop
-			} else if row != dimension-1 && grid[row][0] == options.TokBtm {
-				return true, options.TokBtm
+			if row != 0 && grid[row][0] == options.SymbolTop {
+				return true, options.SymbolTop
+			} else if row != dimension-1 && grid[row][0] == options.SymbolBtm {
+				return true, options.SymbolBtm
 			}
 		}
 
-		// complete column
+		// complete row
 		if countHoriz == dimension-1 {
-			if grid[0][col] == options.TokTop {
-				return true, options.TokTop
+			if grid[0][col] == options.SymbolBtm {
+				return true, options.SymbolBtm
 			} else {
-				return true, options.TokBtm
+				return true, options.SymbolTop
 			}
 		}
 
@@ -117,7 +117,7 @@ func check_valid(p1, p2 Point, width, height int) bool {
 		valid = false
 	}
 
-	//can only move one square a time (r l t b d)
+	// can only move one square a time (r l t b d)
 	// if (dx == 0 || dx == 1) && (dy == 1 || dy == 0) {
 	// 	valid = true
 	// } else {
@@ -125,4 +125,47 @@ func check_valid(p1, p2 Point, width, height int) bool {
 	// }
 
 	return valid
+}
+
+func computeCoords(grid Grid, space, token string) (*Point, *Point) {
+	dimension := len(grid)
+
+	point1 := Point{0, 0}
+	point2 := Point{0, 0}
+
+	for i := 0; i < dimension; i++ {
+		for j := 0; j < dimension; j++ {
+			if grid[i][j] == token {
+				if i < dimension-1 && grid[i+1][j] == space {
+					point1.X = i
+					point1.Y = j
+					point2.X = i + 1
+					point2.Y = j
+					break
+				}
+				if j < dimension-1 && grid[i][j+1] == space {
+					point1.X = i
+					point1.Y = j
+					point2.X = i
+					point2.Y = j + 1
+					break
+				}
+				if i > 0 && grid[i-1][j] == space {
+					point1.X = i
+					point1.Y = j
+					point2.X = i - 1
+					point2.Y = j
+					break
+				}
+				if j > 0 && grid[i][j-1] == space {
+					point1.X = i
+					point1.Y = j
+					point2.X = i
+					point2.Y = j - 1
+					break
+				}
+			}
+		}
+	}
+	return &point1, &point2
 }

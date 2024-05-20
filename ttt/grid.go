@@ -100,9 +100,9 @@ func print_grid(grid Grid, options *Options) {
 		for j := 0; j < size; j++ {
 			print(boxNumber)
 			token := grid[i][j]
-			if token == options.TokTop {
+			if token == options.SymbolTop {
 				color = options.ColorTop
-			} else if token == options.TokBtm {
+			} else if token == options.SymbolBtm {
 				color = options.ColorBtm
 			} else {
 				color = ORIGINAL

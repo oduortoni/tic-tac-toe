@@ -1,17 +1,28 @@
 package main
 
 import (
+	"bufio"
+	"os"
+
 	t "ttt/ttt"
 )
 
 func main() {
-	opt := &t.Options{
-		TokTop:  "x",
-		ColorTop:  t.GetColor("cyan"),
-		TokBtm:  "o",
-		ColorBtm:  t.GetColor("red"),
-		Empty:     ".",
-		Dimension: 3,
+	reader := bufio.NewReader(os.Stdout)
+
+	options := t.Options{
+		SymbolTop:  "O",
+		ColorTop:   t.GetColor("cyan"),
+		SymbolBtm:  "X",
+		ColorBtm:   t.GetColor("red"),
+		Empty:      ".",
+		Dimension:  3,
+		Computer:   true,
+		Starter:    "X",
+		SymbolComp: "O",
 	}
-	t.Play(opt)
+
+	t.Configure(reader, &options)
+
+	t.Play(&options)
 }

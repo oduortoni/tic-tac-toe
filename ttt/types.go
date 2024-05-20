@@ -3,12 +3,15 @@ package ttt
 type Grid [][]string
 
 type Options struct {
-	TokTop    string
+	SymbolTop    string
 	ColorTop    string
-	TokBtm    string
+	SymbolBtm    string
 	ColorBtm    string
 	Empty     string
 	Dimension int
+	Starter string
+	Computer bool
+	SymbolComp string
 }
 type Point struct {
 	X int
